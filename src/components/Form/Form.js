@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FileBase from 'react-file-base64';
 import formTheme from "../Posts/Post/stylesForPost";
 import { TextField, Button, Typography, Paper } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { createPost } from "../../actions/postActions";
+import { createPost, updatePost } from "../../actions/postActions";
+import { useSelector } from "react-redux";
 
-
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
 
     const [postData, setPostData] = useState({
         creator: '',
@@ -15,16 +15,29 @@ const Form = () => {
         tags: '',
         selectedFile: ''
     });
+
+    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
+
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (post) setPostData(post);
+    }, [post]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        dispatch(createPost(postData));
+        if (currentId) {
+            dispatch(updatePost(currentId, postData));
+        } else {
+            dispatch(createPost(postData));
+        }        
+        clear();
     }
 
     const clear = () => {
-
+        setCurrentId(null);
+        setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' })
     }
 
     return (
@@ -35,7 +48,7 @@ const Form = () => {
                 justifyContent: 'center'
             }} autoComplete="off" noValidate onSubmit={handleSubmit}>
                 <Typography variant="h6">
-                    Creating a Memory
+                    {currentId ? 'Editing' : 'Creating'} a Memory
                 </Typography>
                 <TextField
                     sx={{ m: 1 }}
@@ -74,8 +87,10 @@ const Form = () => {
                     onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
                 />
 
-                <div style={{ width: '97%',
-    margin: '10px 0' }}>
+                <div style={{
+                    width: '97%',
+                    margin: '10px 0'
+                }}>
                     <FileBase
                         type="file"
                         multiple={false}

@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import { configureStore } from '@reduxjs/toolkit';
 import App from './App';
 import reducers from './reducers';
+import './index.css';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 
