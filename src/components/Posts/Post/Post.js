@@ -6,7 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 
-import { deletePost } from "../../../actions/postActions";
+import { deletePost, likePost } from "../../../actions/postActions";
 
 const Post = ({ post, setCurrentId }) => {
 
@@ -53,17 +53,17 @@ const Post = ({ post, setCurrentId }) => {
             <Typography sx={{ padding: '0 16px' }} variant="h5" gutterBottom>{post.title}</Typography>
 
             <CardContent>
-                <Typography variant="h5" gutterBottom>{post.message}</Typography>
+                <Typography variant="body2" color="textSecondary" component="p" >{post.message}</Typography>
             </CardContent>
 
             <CardActions sx={{ padding: '0 16px 8px 16px', display: 'flex', justifyContent: 'space-between' }}>
-                <Button size="small" color="primary" onClick={() => { }}>
+                <Button size="small" color="primary" onClick={() => { dispatch(likePost(post._id)) }}>
                     <ThumbUpAltIcon fontSize="small" />
-                    Like {post.likeCount}
+                    &nbsp;Like&nbsp;{post.likeCount}
                 </Button>
                 <Button size="small" color="primary" onClick={() => { dispatch(deletePost(post._id)) }}>
                     <DeleteIcon fontSize="small" />
-                    Delete
+                    &nbsp;Delete
                 </Button>
             </CardActions>
 
