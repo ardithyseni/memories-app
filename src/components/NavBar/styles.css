@@ -1,0 +1,21 @@
+.profile {
+    display: 'flex';
+    justify-content: 'space-between';
+    width: '400px';
+    align-items: 'center';
+    @media screen and (max-width: 600px){
+      width: 'auto';
+      margin-top: 20px;
+      justify-content: 'center';
+    }
+}
+
+.purple {
+    color: rgb(121, 15, 121);
+}
+
+.userName {
+    display: 'flex';
+    align-items: 'center';
+    text-align: 'center';
+}
