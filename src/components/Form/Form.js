@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import FileBase from 'react-file-base64';
-import formTheme from "../Posts/Post/stylesForPost";
 import { TextField, Button, Typography, Paper } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { createPost, updatePost } from "../../actions/postActions";
