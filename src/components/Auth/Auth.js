@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@mui/material';
 import { GoogleLogin } from '@react-oauth/google';
+import { useDispatch } from "react-redux";
+import jwt_decode from "jwt-decode";
+
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Input from "./Input";
+import { AUTH } from "../../constants/actionTypes";
 
 const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -10,6 +14,8 @@ const Auth = () => {
     const [isSignup, setIsSignup] = useState(false);
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
+
+    const dispatch = useDispatch();
 
     const handleSubmit = () => {
 
@@ -92,15 +98,26 @@ const Auth = () => {
                     <Button type="submit" fullWidth variant="contained" color="primary" sx={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }} >
                         {isSignup ? 'Sign Up' : 'Sign In'}
                     </Button>
-                        <GoogleLogin
-                            onSuccess={credentialResponse => {
-                                console.log(credentialResponse);
-                            }}
-                            onError={() => {
-                                console.log('Login Failed');
-                            }}
+                    <GoogleLogin
+                        onSuccess={credentialResponse => {
+                            const result = credentialResponse;
+                            const token = credentialResponse.credential;
+                            const decodedToken = jwt_decode(token);
+                            
+                            console.log(credentialResponse);
+                            console.log(decodedToken);
+                            try {
+                                dispatch({ type: 'AUTH', data: {result, decodedToken} });
+                                console.log('it did the try dispatch');
+                            } catch (error) {
+                                console.log(error);
+                            }
+                        }}
+                        onError={() => {
+                            console.log('Login Failed');
+                        }}
 
-                        />
+                    />
                     <Grid container sx={{ justifyContent: 'flex-end', marginTop: 2 }}>
                         <Grid item>
                             <Button onClick={switchMode} sx={{ fontSize: 12 }}>
