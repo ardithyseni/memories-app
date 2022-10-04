@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@mui/material';
 import { GoogleLogin } from '@react-oauth/google';
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -16,6 +17,7 @@ const Auth = () => {
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleSubmit = () => {
 
@@ -108,6 +110,7 @@ const Auth = () => {
                             console.log(decodedToken);
                             try {
                                 dispatch({ type: 'AUTH', data: {result, decodedToken} });
+                                history.push('/');
                                 console.log('it did the try dispatch');
                             } catch (error) {
                                 console.log(error);
