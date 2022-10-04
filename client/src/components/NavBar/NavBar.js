@@ -24,10 +24,11 @@ const NavBar = () => {
     useEffect(() => {
         const decodedToken = user?.decodedToken;
 
+
         // JWT...
 
         setUser(JSON.parse(localStorage.getItem('profile')));
-    }, [location]);
+    }, [location, user?.decodedToken]);
 
     return (
         <AppBar sx={{

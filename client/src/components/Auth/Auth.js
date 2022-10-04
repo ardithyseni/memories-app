@@ -4,27 +4,40 @@ import { GoogleLogin } from '@react-oauth/google';
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Input from "./Input";
-import { AUTH } from "../../constants/actionTypes";
+import { signin, signup} from '../../actions/auth';
+
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const [isSignup, setIsSignup] = useState(false);
 
+    const [formData, setFormData] = useState(initialState);
+
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
+        if(isSignup) {
+            // logic to sign up
+            dispatch(signup(formData, history)) // also pass the history to navigate
+        } 
+        else { // sign in
+            dispatch(signin(formData, history)) // also pass the history to navigate
+        }
+
+        console.log(formData);
     };
 
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const switchMode = () => {
@@ -69,8 +82,8 @@ const Auth = () => {
                                         half
                                     />
                                     <Input
-                                        name="secondName"
-                                        label="Second Name"
+                                        name="lastName"
+                                        label="Last Name"
                                         handleChange={handleChange}
                                     />
                                 </>
