@@ -42,7 +42,7 @@ const Auth = () => {
 
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup);
-        handleShowPassword(false);
+        setShowPassword(false);
     };
 
     // const googleSuccess = async (res) => {
@@ -116,13 +116,13 @@ const Auth = () => {
                     <GoogleLogin
                         onSuccess={credentialResponse => {
                             const result = credentialResponse;
-                            const token = credentialResponse.credential;
-                            const decodedToken = jwt_decode(token);
+                            const token = jwt_decode(credentialResponse.credential);
+                            // const decodedToken = jwt_decode(token);
                             
                             console.log(credentialResponse);
-                            console.log(decodedToken);
+                            console.log(token);
                             try {
-                                dispatch({ type: 'AUTH', data: {result, decodedToken} });
+                                dispatch({ type: 'AUTH', data: {result, token} });
                                 history.push('/');
                                 console.log('it did the try dispatch');
                             } catch (error) {

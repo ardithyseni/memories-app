@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import memories from '../../images/memories.png';
 import './styles.css';
+import GoogleAuthNavBar from "./GoogleAuthNavBar";
+import AuthNavBar from "./AuthNavBar";
 
 const NavBar = () => {
 
@@ -22,13 +24,28 @@ const NavBar = () => {
     };
 
     useEffect(() => {
-        const decodedToken = user?.decodedToken;
+        // const decodedToken = user?.decodedToken;
+        const token = user?.token;
 
 
         // JWT...
 
         setUser(JSON.parse(localStorage.getItem('profile')));
-    }, [location, user?.decodedToken]);
+    }, [location]);
+
+    
+    const renderCorrectNavBar = () => {
+        if (user === null) {
+            return <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>;
+        } 
+        else if (user.result.credential) {
+            return <GoogleAuthNavBar user={user} logout={logout} />
+        }
+        else if (user.result.name) {
+            return <AuthNavBar user={user} logout={logout} />
+        }
+    }
+    
 
     return (
         <AppBar sx={{
@@ -47,25 +64,7 @@ const NavBar = () => {
                 <img src={memories} style={{ marginLeft: '15px' }} alt="memories" height="60" />
             </div>
             <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', width: { xs: 'auto', sm: 'auto', md: '400px' } }}>
-                {user ? (
-                    <div className="profile" style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        width: '300px',
-                        alignItems: 'center',
-                    }}  >
-                        <Avatar
-                            className="purple"
-                            alt={user.decodedToken.name}
-                            src={user.decodedToken.picture}
-                        >{user.decodedToken.name.charAt(0)}
-                        </Avatar>
-                        <Typography className="userName" variant="h6">{user.decodedToken.name}</Typography>
-                        <Button variant="contained" sx={{ marginLeft: '10px' }} color="secondary" onClick={logout} >Logout</Button>
-                    </div>
-                ) : (
-                    <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
-                )}
+            {renderCorrectNavBar()}
             </Toolbar>
         </AppBar>
     );
