@@ -34,17 +34,17 @@ const NavBar = () => {
     }, [location]);
 
     
-    const renderCorrectNavBar = () => {
-        if (user === null) {
-            return <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>;
-        } 
-        else if (user.result.credential) {
-            return <GoogleAuthNavBar user={user} logout={logout} />
-        }
-        else if (user.result.name) {
-            return <AuthNavBar user={user} logout={logout} />
-        }
-    }
+    // const renderCorrectNavBar = () => {
+    //     if (user === null) {
+    //         return <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>;
+    //     } 
+    //     else if (user.result.credential) {
+    //         return <GoogleAuthNavBar user={user} logout={logout} />
+    //     }
+    //     else if (user.result.name) {
+    //         return <AuthNavBar user={user} logout={logout} />
+    //     }
+    // }
     
 
     return (
@@ -64,7 +64,27 @@ const NavBar = () => {
                 <img src={memories} style={{ marginLeft: '15px' }} alt="memories" height="60" />
             </div>
             <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', width: { xs: 'auto', sm: 'auto', md: '400px' } }}>
-            {renderCorrectNavBar()}
+            {/* {renderCorrectNavBar()} */}
+            {user ? (
+                    <div className="profile" style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        width: '300px',
+                        alignItems: 'center',
+                    }}  >
+                        <Avatar
+                            className="purple"
+                            alt={user.result.name}
+                            src={user.result.picture}
+                        >
+                        {user.result.name.charAt(0)}
+                        </Avatar>
+                        <Typography className="userName" variant="h6">{user.result.name}</Typography>
+                        <Button variant="contained" sx={{ marginLeft: '10px' }} color="secondary" onClick={logout} >Logout</Button>
+                    </div>
+                ) : (
+                    <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+                )}
             </Toolbar>
         </AppBar>
     );

@@ -115,8 +115,8 @@ const Auth = () => {
                     </Button>
                     <GoogleLogin
                         onSuccess={credentialResponse => {
-                            const result = credentialResponse;
-                            const token = jwt_decode(credentialResponse.credential);
+                            const result = jwt_decode(credentialResponse.credential);
+                            const token = credentialResponse.credential;
                             // const decodedToken = jwt_decode(token);
                             
                             console.log(credentialResponse);

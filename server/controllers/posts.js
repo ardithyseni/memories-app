@@ -18,12 +18,12 @@ export const getPosts = async (req, res) => {
 export const createPost = async (req, res) => {
     const post = req.body;
 
-    const newPost = new PostMessage(post);
+    const newPostMessage = new PostMessage({ ...post, creator: req.userId, createdAt: new Date().toISOString() });
 
     try {
-        await newPost.save();
+        await newPostMessage.save();
 
-        res.status(201).json(newPost);
+        res.status(201).json(newPostMessage);
     } catch (error) {
         res.status(409).json({ message: error.message });
     }
@@ -36,10 +36,10 @@ export const updatePost = async (req, res) => {
     const post = req.body;
     if (!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(404).send('No post with that id');
-    } 
+    }
 
-    
-    const updatedPost = await PostMessage.findByIdAndUpdate(_id, { ...post, _id }, {new: true });
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(_id, { ...post, _id }, { new: true });
 
     res.json(updatedPost);
 }
@@ -68,7 +68,7 @@ export const likePost = async (req, res) => {
 
     const post = await PostMessage.findById(id);
 
-    
+
     const index = post.likes.findIndex((id) => id === String(req.userId));
 
     if (index === -1) {

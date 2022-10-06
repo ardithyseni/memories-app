@@ -32,7 +32,7 @@ const Post = ({ post, setCurrentId }) => {
                 title={post.tile}
             />
             <div style={{ position: 'absolute', top: '20px', left: '20px', color: 'white' }}>
-                <Typography variant="h6">{post.creator}</Typography>
+                <Typography variant="h6">{post.name}</Typography>
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
 
