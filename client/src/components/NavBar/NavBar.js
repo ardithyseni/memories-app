@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import memories from '../../images/memories.png';
 import './styles.css';
+import decode from 'jwt-decode';
 import GoogleAuthNavBar from "./GoogleAuthNavBar";
 import AuthNavBar from "./AuthNavBar";
 
@@ -27,6 +28,11 @@ const NavBar = () => {
         // const decodedToken = user?.decodedToken;
         const token = user?.token;
 
+        if (token) {
+            const decodedToken = decode(token);
+
+            if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+        }
 
         // JWT...
 

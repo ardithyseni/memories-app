@@ -31,7 +31,7 @@ const Form = ({ currentId, setCurrentId }) => {
             dispatch(createPost({ ...postData, name: user?.result?.name }));
         } else {
             dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
-        }        
+        }
         clear();
     }
 
@@ -40,15 +40,20 @@ const Form = ({ currentId, setCurrentId }) => {
         setPostData({ title: '', message: '', tags: '', selectedFile: '' })
     }
 
-    if (!user?.result?.name) {
-        <Paper sx={{ p: 2, m: 1 }}>
-            <Typography variant="h6" align="center">Please Sign In to create your own memories and like other memories</Typography>
-        </Paper>
-    }
+    // if (!user?.result?.name) {
+    //     (
+    //         <Paper sx={{ p: 2, m: 1 }}>
+    //             <Typography variant="h6" align="center">
+    //                 Please Sign In to create your own memories and like other memories
+    //             </Typography>
+    //         </Paper>
+    //     )
+    // }
 
     return (
+
         <Paper sx={{ p: 2, m: 1 }}>
-            <form style={{
+            {user ? (<form style={{
                 display: 'flex',
                 flexWrap: 'wrap',
                 justifyContent: 'center'
@@ -71,6 +76,8 @@ const Form = ({ currentId, setCurrentId }) => {
                     variant="outlined"
                     label="Message"
                     fullWidth
+                    multiline
+                    rows={3}
                     value={postData.message}
                     onChange={(e) => setPostData({ ...postData, message: e.target.value })}
                 />
@@ -112,6 +119,11 @@ const Form = ({ currentId, setCurrentId }) => {
                 >Clear
                 </Button>
             </form>
+            ) : 
+            (<Typography variant="h6" align="center">
+                Please Sign In to create your own memories and like other memories
+            </Typography>)}
+
         </Paper>
     );
 }
