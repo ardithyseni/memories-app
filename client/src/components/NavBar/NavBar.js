@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { AppBar, Avatar, Button, Toolbar, Typography } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
+import memoriesLogo from '../../images/memoriesLogo.png';
+import memoriesText from '../../images/memoriesText.png';
 import memories from '../../images/memories.png';
 import './styles.css';
 import decode from 'jwt-decode';
@@ -59,17 +61,18 @@ const NavBar = () => {
             color: 'inherit',
             backgroundColor: 'lightblue',
             borderRadius: 15,
-            margin: '30px 10px',
+            margin: '30px 0',
             display: 'flex',
-            flexDirection: 'row',
+            padding: '10px 10px',
+            flexDirection: {sm: 'row', xs: 'column', md: 'row', lg: 'row', xl: 'row'},
             justifyContent: 'space-between',
-            // alignItems: 'center',
+            alignItems: 'center',
         }} >
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Typography component={Link} to="/" sx={{ color: 'rgba(0,183,255, 1)', variant: 'h2', align: 'center', textDecoration: 'none', marginLeft: 5 }}>Memories</Typography>
-                <img src={memories} style={{ marginLeft: '15px' }} alt="memories" height="60" />
-            </div>
-            <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', width: { xs: 'auto', sm: 'auto', md: '400px' } }}>
+            <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
+                <img style={{ margin: '5px 0px 0px 10px' }} src={memoriesText} alt="icon" height="45px" />
+                <img src={memoriesLogo} style={{ margin: '5px 0px 0px 10px' }} alt="memories" height="40" />
+            </Link>
+            <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', width: '400px' }}>
             {/* {renderCorrectNavBar()} */}
             {user ? (
                     <div className="profile" style={{
