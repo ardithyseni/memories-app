@@ -64,15 +64,15 @@ const NavBar = () => {
             margin: '30px 0',
             display: 'flex',
             padding: '10px 10px',
-            flexDirection: {sm: 'row', xs: 'column', md: 'row', lg: 'row', xl: 'row'},
+            flexDirection: {sm: 'cloumn', xs: 'column', md: 'row', lg: 'row', xl: 'row'},
             justifyContent: 'space-between',
             alignItems: 'center',
         }} >
             <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-                <img style={{ margin: '5px 0px 0px 10px' }} src={memoriesText} alt="icon" height="45px" />
-                <img src={memoriesLogo} style={{ margin: '5px 0px 0px 10px' }} alt="memories" height="40" />
+                <img style={{ margin: '5px 0px 0px 10px'  }} src={memoriesText} alt="icon" height="40px" />
+                <img src={memoriesLogo} style={{ margin: '5px 0px 0px 10px' }} alt="memories" height="40px" />
             </Link>
-            <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', width: '400px' }}>
+            <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', width: 'auto' }}>
             {/* {renderCorrectNavBar()} */}
             {user ? (
                     <div className="profile" style={{
@@ -92,7 +92,7 @@ const NavBar = () => {
                         <Button variant="contained" sx={{ marginLeft: '10px' }} color="secondary" onClick={logout} >Logout</Button>
                     </div>
                 ) : (
-                    <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+                    <Button sx={{ marginLeft: '10px' }} component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
                 )}
             </Toolbar>
         </AppBar>

@@ -21,10 +21,6 @@ const Paginate = ({ page }) => {
             variant="outlined"
             color="primary"
             sx={{ 
-                borderRadius: 4, 
-                marginTop: '1rem', 
-                padding: '16px', 
-                display:'flex', 
                 justifyContent: 'space-around' 
             }} 
             renderItem={(item) => (

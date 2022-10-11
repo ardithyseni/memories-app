@@ -87,7 +87,7 @@ const Home = () => {
                             />
 
                             <Autocomplete
-                                sx={{ margin: '15px 0'}}
+                                sx={{ margin: '15px 0' }}
                                 multiple
                                 id="tags-filled"
                                 options={tags}
@@ -116,8 +116,12 @@ const Home = () => {
 
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
-                        <Paper elevation={6}>
-                            <Paginate page={page}/>
+                        <Paper sx={{
+                            borderRadius: 4,
+                            marginTop: '1rem',
+                            padding: '16px'
+                        }} elevation={6}>
+                            <Paginate page={page} />
                         </Paper>
                     </Grid>
                 </Grid>

@@ -52,7 +52,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
     return (
 
-        <Paper sx={{ p: 2, m: 1 }}>
+        <Paper sx={{ p: 2, m: 1 }} elevation={6} >
             {user ? (<form style={{
                 display: 'flex',
                 flexWrap: 'wrap',
