@@ -77,7 +77,7 @@ const PostDetails = () => {
                     }} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
                 </div>
             </div>
-            {recommendedPosts.length && (
+            {recommendedPosts.length > 0 ? (
                 <div style={{ borderRadius: '20px', margin: '10px', flex: 1, flexDirection: { xs: 'column', sm: 'column', md: 'row', lg: 'row', xl: 'row' } }}>
                     <Typography gutterBottom variant="h5">You might also like:</Typography>
                     <Divider />
@@ -102,7 +102,7 @@ const PostDetails = () => {
                         ))}
                     </div>
                 </div>
-            )}
+            ): null}
         </Paper>
     )
 };

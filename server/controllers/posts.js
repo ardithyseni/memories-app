@@ -107,6 +107,7 @@ export const likePost = async (req, res) => {
     if (index === -1) {
         // like the post
         post.likes.push(req.userId);
+        console.log(req);
     } else {
         // dislike a post
         post.likes = post.likes.filter((id) => id !== String(req.userId));
@@ -115,4 +116,5 @@ export const likePost = async (req, res) => {
     const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
 
     res.json(updatedPost);
+    
 }

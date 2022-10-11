@@ -20,7 +20,7 @@ const Post = ({ post, setCurrentId }) => {
 
     const Likes = () => {
         if (post.likes.length > 0) {
-            return post.likes.find((like) => like === (user?.result?.jti || user?.result?._id))
+            return post.likes.find((like) => like === (user?.clientId || user?.result?._id))
                 ? (
                     <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}`}</>
                 ) : (
@@ -42,54 +42,50 @@ const Post = ({ post, setCurrentId }) => {
             height: '100%',
             position: 'relative'
         }}>
-            <ButtonBase sx={{ display: 'block', textAlign: 'initial' }} onClick={openPost} >
-
-
-                <CardMedia
-                    sx={{
-                        height: 0,
-                        paddingTop: '56.25%',
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                        backgroundBlendMode: 'darken'
-                    }}
-                    image={post.selectedFile}
-                    title={post.tile}
-                />
+            <ButtonBase
+                component="span"
+                name="test"
+                sx={{ display: 'block', textAlign: 'initial' }}
+                onClick={openPost}
+            >
+                <CardMedia sx={{
+                    height: 0,
+                    paddingTop: '56.25%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    backgroundBlendMode: 'darken'
+                }} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
                 <div style={{ position: 'absolute', top: '20px', left: '20px', color: 'white' }}>
                     <Typography variant="h6">{post.name}</Typography>
                     <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
                 </div>
-
-                {(user?.result?.jti === post?.creator || user?.result?._id === post?.creator) && (
-
-                    <div style={{ position: 'absolute', top: '20px', right: '20px', color: 'white' }}>
+                {(user?.result?.sub === post?.creator || user?.result?._id === post?.creator) && (
+                    <div style={{ position: 'absolute', top: '20px', right: '20px', color: 'white' }} name="edit">
                         <Button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setCurrentId(post._id);
+                            }}
                             style={{ color: 'white' }}
                             size="small"
-                            onClick={() => setCurrentId(post._id)}
                         >
                             <MoreHorizIcon fontSize="large" />
                         </Button>
                     </div>
-
                 )}
-
                 <div style={{ display: 'flex', justifyContent: 'space-between', margin: '20px' }}>
-                    <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag} `)}</Typography>
+                    <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
                 </div>
-
-                <Typography sx={{ padding: '0 16px' }} variant="h5" gutterBottom>{post.title}</Typography>
-
+                <Typography sx={{ padding: '0 16px' }} gutterBottom variant="h5" component="h2">{post.title}</Typography>
                 <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p" >{post.message}</Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">{post.message.split(' ').splice(0, 20).join(' ')}...</Typography>
                 </CardContent>
             </ButtonBase>
             <CardActions sx={{ padding: '0 16px 8px 16px', display: 'flex', justifyContent: 'space-between' }}>
                 <Button size="small" color="primary" disabled={!user?.result} onClick={() => { dispatch(likePost(post._id)) }}>
                     <Likes />
                 </Button>
-                {(user?.result?.jti === post?.creator || user?.result?._id === post?.creator) && (
-                    <Button size="small" color="primary" onClick={() => { dispatch(deletePost(post._id)) }}>
+                {(user?.result?.sub === post?.creator || user?.result?._id === post?.creator) && (
+                    <Button size="small" color="error" onClick={() => { dispatch(deletePost(post._id)) }}>
                         <DeleteIcon fontSize="small" />
                         &nbsp;Delete
                     </Button>
