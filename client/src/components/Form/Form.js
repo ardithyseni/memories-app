@@ -4,8 +4,10 @@ import { TextField, Button, Typography, Paper } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { createPost, updatePost } from "../../actions/postActions";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const Form = ({ currentId, setCurrentId }) => {
+    const history = useHistory();
 
     const [postData, setPostData] = useState({
         title: '',
@@ -14,7 +16,7 @@ const Form = ({ currentId, setCurrentId }) => {
         selectedFile: ''
     });
 
-    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
+    const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId) : null);
 
     const dispatch = useDispatch();
 
@@ -28,7 +30,8 @@ const Form = ({ currentId, setCurrentId }) => {
         e.preventDefault();
 
         if (currentId === null) {
-            dispatch(createPost({ ...postData, name: user?.result?.name }));
+            dispatch(createPost({ ...postData, name: user?.result?.name }, history));
+            
         } else {
             dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
         }
