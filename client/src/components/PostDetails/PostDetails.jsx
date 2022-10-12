@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { getPost, getPostsBySearch } from '../../actions/postActions';
+import CommentSection from './CommentSection';
 
 
 const PostDetails = () => {
@@ -45,7 +46,8 @@ const PostDetails = () => {
         <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
             <div style={{
                 display: 'flex',
-                width: '100%', flexWrap: { xs: 'wrap', sm: 'wrap', md: 'nowrap', lg: 'nowrap', xl: 'nowrap' }, flexDirection: { xs: 'column-reverse', sm: 'column-reverse', md: 'row', lg: 'row', xl: 'row' }
+                width: '100%',
+                flexWrap: 'wrap-reverse'
             }}>
                 <div style={{
                     borderRadius: '20px',
@@ -61,19 +63,19 @@ const PostDetails = () => {
                     <Divider style={{ margin: '20px 0' }} />
                     <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
                     <Divider style={{ margin: '20px 0' }} />
-                    <Typography variant="body1"><strong>Comments - coming soon!</strong></Typography>
+                    <CommentSection post={post} />
                     <Divider style={{ margin: '20px 0' }} />
                 </div>
-                <div style={{ maxWidth: '70%', maxHeight: '550px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: { xs: '0', sm: '0', md: '20px', lg: '20px', xl: '20px' } }}>
+                <div style={{ maxWidth: '60%', minWidth: '25%', margin: '0 auto', maxHeight: '550px', display: 'flex', flexWrap: {xs: 'wrap', sm: 'wrap'} ,  justifyContent: 'center', alignItems: 'center', marginLeft: { xs: '0', sm: '0', md: '20px', lg: '20px', xl: '20px' } }}>
                     <img style={{
-                        borderRadius: '20px',
+                        borderRadius: '17px',
                         objectFit: 'contain',
-                        margin: '0px 0px 0px 10px',
+                        margin: '0 auto',
                         display: 'block',
                         maxHeight: '100%',
-                        minHeight: '25%',
+                        minHeight: '40%',
                         maxWidth: '90%',
-                        minWidth: '25%'
+                        minWidth: '45%'
                     }} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
                 </div>
             </div>
