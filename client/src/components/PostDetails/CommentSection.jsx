@@ -27,7 +27,7 @@ const CommentSection = ({ post }) => {
     // JSX code
     return (
         <div>
-            <div style={{ display: 'flex',justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex',justifyContent: 'space-between', borderRadius: '10px', padding: '8px', backgroundColor: '#E5E4E2' }}>
                 <div style={{ height: '200px', overflowY: 'auto', marginRight: '30px'}}>
                     <Typography gutterBottom variant="h6">
                         Comments

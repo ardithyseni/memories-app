@@ -66,21 +66,21 @@ const PostDetails = () => {
                     <CommentSection post={post} />
                     <Divider style={{ margin: '20px 0' }} />
                 </div>
-                <div style={{ maxWidth: '60%', minWidth: '25%', margin: '0 auto', maxHeight: '550px', display: 'flex', flexWrap: {xs: 'wrap', sm: 'wrap'} ,  justifyContent: 'center', alignItems: 'center', marginLeft: { xs: '0', sm: '0', md: '20px', lg: '20px', xl: '20px' } }}>
+                <div style={{ maxWidth: '60vw', minWidth: '25%', margin: '0 auto', maxHeight: '550px', display: 'flex', flexWrap: {xs: 'wrap', sm: 'wrap'} ,  justifyContent: 'center', alignItems: 'center', marginLeft: { xs: '0', sm: '0', md: '20px', lg: '20px', xl: '20px' } }}>
                     <img style={{
                         borderRadius: '17px',
                         objectFit: 'contain',
                         margin: '0 auto',
                         display: 'block',
                         maxHeight: '100%',
-                        minHeight: '40%',
+                        // minHeight: '40%',
                         maxWidth: '90%',
                         minWidth: '45%'
                     }} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
                 </div>
             </div>
             {recommendedPosts.length > 0 ? (
-                <div style={{ borderRadius: '20px', margin: '10px', flex: 1, flexDirection: { xs: 'column', sm: 'column', md: 'row', lg: 'row', xl: 'row' } }}>
+                <div style={{ borderRadius: '20px', backgroundColor: '#E2FDFF', padding: '15px', margin: '10px', flex: 1, flexDirection: { xs: 'column', sm: 'column', md: 'row', lg: 'row', xl: 'row' } }}>
                     <Typography gutterBottom variant="h5">You might also like:</Typography>
                     <Divider />
                     <div style={{
