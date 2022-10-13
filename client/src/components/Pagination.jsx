@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {Pagination, PaginationItem} from '@mui/material';
+import { Pagination, PaginationItem } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../actions/postActions";
@@ -15,14 +15,15 @@ const Paginate = ({ page }) => {
     }, [page]); // run it everytime a page changes
 
     return (
-        <Pagination 
+        <Pagination
             count={numberOfPages}
             page={Number(page) || 1}
             variant="outlined"
             color="primary"
-            sx={{ 
-                justifyContent: 'space-around' 
-            }} 
+            sx={{
+                display: 'flex',
+                justifyContent: 'space-around'
+            }}
             renderItem={(item) => (
                 <PaginationItem {...item} component={Link} to={`/posts?page=${item.page}`} />
             )}

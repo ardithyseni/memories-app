@@ -61,12 +61,12 @@ const PostDetails = () => {
                     <Typography variant="h6">Created by: {post.name}</Typography>
                     <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
                     <Divider style={{ margin: '20px 0' }} />
-                    <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
-                    <Divider style={{ margin: '20px 0' }} />
+                    {/* <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
+                    <Divider style={{ margin: '20px 0' }} /> */}
                     <CommentSection post={post} />
                     <Divider style={{ margin: '20px 0' }} />
                 </div>
-                <div style={{ maxWidth: '60vw', minWidth: '25%', margin: '0 auto', maxHeight: '550px', display: 'flex', flexWrap: {xs: 'wrap', sm: 'wrap'} ,  justifyContent: 'center', alignItems: 'center', marginLeft: { xs: '0', sm: '0', md: '20px', lg: '20px', xl: '20px' } }}>
+                <div style={{ maxWidth: '60vw', minWidth: '35%', margin: 'auto auto', maxHeight: '550px', display: 'flex', flexWrap: {xs: 'wrap', sm: 'wrap'} ,  justifyContent: 'center', alignItems: 'center', marginLeft: { xs: '0', sm: '0', md: '20px', lg: '20px', xl: '20px' } }}>
                     <img style={{
                         borderRadius: '17px',
                         objectFit: 'contain',

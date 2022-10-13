@@ -6,12 +6,14 @@ import Home from './components/home/Home';
 import Auth from './components/Auth/Auth';
 import PostDetails from './components/PostDetails/PostDetails';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import Footer from './components/Footer';
 
 const App = () => {
 
     const user = JSON.parse(localStorage.getItem('profile'));
 
     return (
+        <>
         <BrowserRouter>
         <GoogleOAuthProvider clientId="1066946270031-54glln1vrs9fmai8mnh561u6oas000b9.apps.googleusercontent.com">
             <Container maxWidth="xl">
@@ -26,6 +28,8 @@ const App = () => {
             </Container>
             </GoogleOAuthProvider>
         </BrowserRouter>
+        <Footer />
+        </>
     );
 }
 
