@@ -1,5 +1,10 @@
+![](https://i.ibb.co/cvkcJFm/memories-Text.png)
+
 Memories App is a full-stack MERN Web Application. It is a social media app that allows users to post 
-interesting events with an image. The app also features authentication, including Google OAuth 2.
+interesting events with an image. The app also features comments, recommended posts, 
+authentication, including Google OAuth 2 (Google Sign-in).
+
+Developed by me following the JavaScript Mastery YouTube Course.
 
 
 # Getting Started with Create React App
@@ -10,6 +15,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `cd .\server\`
+### `npm start`
+then
+### `cd .\client\`
 ### `npm start`
 
 Runs the app in the development mode.\
