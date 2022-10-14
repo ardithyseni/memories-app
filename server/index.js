@@ -8,6 +8,7 @@ import postRoutes from './routes/posts.js';
 import userRoutes from './routes/users.js';
 
 const app = express();
+const path = require('path');
 dotenv.config();
 
 
@@ -18,6 +19,7 @@ app.use(cors());
 app.use('/posts', postRoutes); // the prefix for all routes in the routes/posts.js file
 app.use('/user', userRoutes);
 
+
 // const CONNECTION_URL = 'mongodb+srv://ardithyseni:ardithyseni123@cluster0.c1dqiz4.mongodb.net/?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
 
@@ -25,5 +27,11 @@ mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true, useUnifiedT
     .then(() => app.listen(PORT, () => console.log(`Server running on port:${PORT}`)))
     .catch((error) => console.log(error));
 
-// mongoose.set('useFindAndModify', false);
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static("client/build"));
 
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
+    });
+}
