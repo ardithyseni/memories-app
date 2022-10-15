@@ -1,12 +1,19 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: 'http://localhost:5000' });
+
+
+if (process.env.NODE_ENV === 'production') {
+    var API = axios.create({ baseURL: 'https://travelling-memories.herokuapp.com' });
+}
+else if (process.env.NODE_ENV === 'development') {
+    var API = axios.create({ baseURL: 'http://localhost:5000' });
+}
 
 // const url = 'http://localhost:5000/posts';
 
 API.interceptors.request.use((req) => {
-    
-    if(localStorage.getItem('profile')) {
+
+    if (localStorage.getItem('profile')) {
         req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
     }
 
