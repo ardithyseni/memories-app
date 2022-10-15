@@ -3,13 +3,13 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
-
+import path from 'path';
 import postRoutes from './routes/posts.js';
 import userRoutes from './routes/users.js';
 
 const app = express();
-const path = require('path');
-dotenv.config();
+
+dotenv.config({path: './server/.env'});
 
 
 app.use(bodyParser.json({ limit: "30mb", extended: true}));
