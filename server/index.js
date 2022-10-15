@@ -12,8 +12,8 @@ const app = express();
 dotenv.config({path: './server/.env'});
 
 
-app.use(bodyParser.json({ limit: "30mb", extended: true}));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
+// app.use(bodyParser.json({ limit: "30mb", extended: true}));
+// app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 app.use(cors());
 
 app.use('/posts', postRoutes); // the prefix for all routes in the routes/posts.js file
