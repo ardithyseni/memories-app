@@ -14,7 +14,7 @@ export default function Footer() {
                     Made by Ardit Hyseni
                 </Typography>
 
-                <Grid container='true' direction="column" style={{display: 'flex', flexGrow: 'grow', flexDirection: {xs: 'column', sm: 'column'}}} alignItems='center' justifyContent='center' alignContent='center' spacing={2}>
+                <Grid container direction="column" style={{display: 'flex', flexGrow: 'grow', flexDirection: {xs: 'column', sm: 'column'}}} alignItems='center' justifyContent='center' alignContent='center' spacing={2}>
 
                     <Grid item style={{ textAlign: "center" }} xs={1} md={1}>
                         <Typography style={{ display: 'flex', alignItems: 'center' }}>
