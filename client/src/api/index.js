@@ -21,14 +21,14 @@ API.interceptors.request.use((req) => {
 }); // function thats going to happen to each request
 
 
-export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
-export const fetchPost = (id) => API.get(`/posts/${id}`);
-export const fetchPostsBySearch = (searchQuery) => API.get(`/posts/search?searchQuery=${searchQuery.search || 'none'}&tags=${searchQuery.tags}`);
-export const createPost = (newPost) => API.post('/posts', newPost);
-export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updatedPost);
-export const deletePost = (id) => API.delete(`/posts/${id}`);
-export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
-export const comment = (value, id) => API.post(`/posts/${id}/commentPost`, { value });
+export const fetchPosts = (page) => API.get(`/post?page=${page}`);
+export const fetchPost = (id) => API.get(`/post/${id}`);
+export const fetchPostsBySearch = (searchQuery) => API.get(`/post/search?searchQuery=${searchQuery.search || 'none'}&tags=${searchQuery.tags}`);
+export const createPost = (newPost) => API.post('/post', newPost);
+export const updatePost = (id, updatedPost) => API.patch(`/post/${id}`, updatedPost);
+export const deletePost = (id) => API.delete(`/post/${id}`);
+export const likePost = (id) => API.patch(`/post/${id}/likePost`);
+export const comment = (value, id) => API.post(`/post/${id}/commentPost`, { value });
 
 
 export const signIn = (formData) => API.post('/user/signin', formData);

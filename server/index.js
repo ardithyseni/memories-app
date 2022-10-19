@@ -16,7 +16,7 @@ dotenv.config({path: './server/.env'});
 // app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 app.use(cors());
 
-app.use('/posts', postRoutes); // the prefix for all routes in the routes/posts.js file
+app.use('/post', postRoutes); // the prefix for all routes in the routes/post.js file
 app.use('/user', userRoutes);
 
 
