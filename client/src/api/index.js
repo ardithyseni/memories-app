@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 if (process.env.NODE_ENV === 'production') {
-    var API = axios.create({ baseURL: 'https://travelling-memories.onrender.com/' });
+    var API = axios.create({ baseURL: 'https://travelling-memories-backend.onrender.com/' });
 }
 else if (process.env.NODE_ENV === 'development') {
     var API = axios.create({ baseURL: 'http://localhost:5000' });
