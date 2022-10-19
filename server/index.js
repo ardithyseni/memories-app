@@ -9,10 +9,10 @@ import userRoutes from './routes/users.js';
 
 const app = express();
 
-const __dirname = path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config({path: './server/.env'});
-
 
 // app.use(bodyParser.json({ limit: "30mb", extended: true}));
 // app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static("client/build"));
 
     app.get('*', function (req, res) {
-        const index = path.join(__dirname, '../client/build/index.html');
+        const index = path.join(__dirname, '../../client/build/index.html');
         res.sendFile(index);
       });
 }
@@ -40,4 +40,4 @@ mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true, useUnifiedT
     .then(() => app.listen(PORT, () => console.log(`Server running on port:${PORT}`)))
     .catch((error) => console.log(error));
 
-    console.log(__dirname);
+    
